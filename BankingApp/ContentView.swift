@@ -17,6 +17,7 @@ struct ContentView: View {
                 Home(proxy: proxy, size: size, safeArea: safeArea)
             }
             .preferredColorScheme(.light)
+            .ignoresSafeArea()
         }
     }
 }
