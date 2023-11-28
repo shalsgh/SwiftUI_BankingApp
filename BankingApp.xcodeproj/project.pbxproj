@@ -14,6 +14,7 @@
 		5AADC8F02B0F8E42002A7597 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADC8EF2B0F8E42002A7597 /* Card.swift */; };
 		5AADC8F22B0F8EB7002A7597 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADC8F12B0F8EB7002A7597 /* Expense.swift */; };
 		5AADC8F42B0F9C30002A7597 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADC8F32B0F9C30002A7597 /* Home.swift */; };
+		5AADC8F82B163A8C002A7597 /* OffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AADC8F72B163A8C002A7597 /* OffsetReader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		5AADC8EF2B0F8E42002A7597 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		5AADC8F12B0F8EB7002A7597 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		5AADC8F32B0F9C30002A7597 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		5AADC8F72B163A8C002A7597 /* OffsetReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetReader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 		5AADC8DE2B0F8E0B002A7597 /* BankingApp */ = {
 			isa = PBXGroup;
 			children = (
+				5AADC8F62B163A53002A7597 /* Helpers */,
 				5AADC8ED2B0F8E35002A7597 /* View */,
 				5AADC8EE2B0F8E38002A7597 /* Model */,
 				5AADC8DF2B0F8E0B002A7597 /* BankingAppApp.swift */,
@@ -90,6 +93,14 @@
 				5AADC8F12B0F8EB7002A7597 /* Expense.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		5AADC8F62B163A53002A7597 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5AADC8F72B163A8C002A7597 /* OffsetReader.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AADC8F22B0F8EB7002A7597 /* Expense.swift in Sources */,
+				5AADC8F82B163A8C002A7597 /* OffsetReader.swift in Sources */,
 				5AADC8E22B0F8E0B002A7597 /* ContentView.swift in Sources */,
 				5AADC8F42B0F9C30002A7597 /* Home.swift in Sources */,
 				5AADC8F02B0F8E42002A7597 /* Card.swift in Sources */,
