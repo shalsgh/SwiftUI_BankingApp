@@ -13,6 +13,9 @@ struct Home: View {
     var safeArea: EdgeInsets
     @State private var activePage: Int = 1
     @State private var myCard: [Card] = sampleCard
+    /// Page Offset
+    @State private var offset: CGFloat = 0
+    
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -46,11 +49,31 @@ struct Home: View {
                             .frame(width: proxy.width - 60)
                             .tag(index(card))
                             /// Page Tag (Index)
+                            .offsetX(activePage == index(card)) { rect in
+                                let minX = rect.minX
+                                let pageOffset = minX - (size.width * CGFloat(index(card)))
+                                offset = pageOffset
+                                
+                            }
                         }
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
+                    .background {
+                        RoundedRectangle(cornerRadius: 40, style: .continuous)
+                            .fill(Color("ExpandBG").gradient)
+                            .frame(height: pageHeight + fullScreenHeight(size, pageHeight, safeArea))
+                            .frame(width: proxy.width - (60 * reverseProgress(size)), height: pageHeight, alignment: .top)
+                            .offset(x: -15 * reverseProgress(size))
+                            .scaleEffect(0.95 + (0.05 * progress(size)), anchor: .leading)
+                            .offset(x: (offset + size.width) < 0 ? (offset + size.width) : 0)
+                            .offset(y: (offset + size.width) > 0 ? (-proxy.minY *
+                                                                   progress(size)) : 0)
+                    }
                 }
                 .frame(height: pageHeight)
+                
+                
+                Text("\(offset)")
             }
             .padding(.top, safeArea.top + 15)
             .padding(.bottom, safeArea.bottom + 15)
@@ -86,6 +109,25 @@ struct Home: View {
     
     func index(_ of: Card) -> Int {
         return myCard.firstIndex(of: of) ?? 0
+    }
+    
+    func fullScreenHeight(_ size: CGSize, _ pageHeight: CGFloat, _ safeArea: EdgeInsets) -> CGFloat {
+        let progress = progress(size)
+        let remainingScreenHegiht = progress * (size.height - (pageHeight - safeArea.top - safeArea.bottom))
+        
+        return remainingScreenHegiht
+    }
+    
+    func progress(_ size: CGSize) -> CGFloat {
+        let pageOffset = offset + size.width
+        let progress = pageOffset / size.width
+        
+        return min(progress, 1)
+    }
+    
+    func reverseProgress(_ size: CGSize) -> CGFloat {
+        let progress = 1 - progress(size)
+        return min(progress, 1)
     }
 }
 
