@@ -59,7 +59,7 @@ struct Home: View {
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
                     .background {
-                        RoundedRectangle(cornerRadius: 40, style: .continuous)
+                        RoundedRectangle(cornerRadius: 40 * reverseProgress(size), style: .continuous)
                             .fill(Color("ExpandBG").gradient)
                             .frame(height: pageHeight + fullScreenHeight(size, pageHeight, safeArea))
                             .frame(width: proxy.width - (60 * reverseProgress(size)), height: pageHeight, alignment: .top)
@@ -71,9 +71,12 @@ struct Home: View {
                     }
                 }
                 .frame(height: pageHeight)
+                .zIndex(1000)
                 
                 
-                Text("\(offset)")
+                ExpensesView(expenses: myCard[activePage == 0 ? 1 : activePage].exepnses)
+                    .padding(.horizontal, 30)
+                    .padding(.top, 10)
             }
             .padding(.top, safeArea.top + 15)
             .padding(.bottom, safeArea.bottom + 15)
@@ -202,6 +205,35 @@ struct CardView: View {
                     }
             }
             .clipShape(RoundedRectangle(cornerRadius: 40, style: .continuous))
+        }
+    }
+}
+
+struct ExpensesView: View {
+    var expenses : [Expense]
+    @State private var animateChange: Bool = true
+    var body: some View {
+        VStack(spacing: 18) {
+            ForEach(expenses) { expenses in
+                HStack(spacing: 12) {
+                    Image(expenses.productIcon)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 55, height: 55)
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(expenses.product)
+                        Text(expenses.spendType)
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text(expenses.amountSpent)
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                }
+            }
         }
     }
 }
